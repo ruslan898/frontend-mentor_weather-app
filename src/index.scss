@@ -1,6 +1,6 @@
-@use './sass/variables.scss' as *;
-@use './sass/mixins.scss' as *;
-@use './sass/modern-normalize.min.scss';
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+@use '/src/sass/modern-normalize.min.scss';
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 h1,
@@ -38,7 +38,7 @@ img {
 body {
   font-family: 'DM Sans', sans-serif;
 	background-color: $neutral-900;
-	color: $neutral-0
+	color: $neutral-0;
 }
 
 .container {

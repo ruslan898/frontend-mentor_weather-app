@@ -1,0 +1,32 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
+.header {
+  padding-top: 16px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    max-width: 138px;
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding-top: 25px;
+
+    .logo {
+      max-width: 182px;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .header {
+    padding-top: 48px;
+  }
+}
