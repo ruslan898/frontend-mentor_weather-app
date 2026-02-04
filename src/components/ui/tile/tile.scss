@@ -1,0 +1,83 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
+.tile {
+  max-width: 182px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border: 1px solid $neutral-600;
+  border-radius: 12px;
+  background-color: $neutral-800;
+  padding: 20px;
+
+  .tile-text {
+    @include text-preset-6;
+    color: $neutral-200;
+  }
+
+  .tile-value {
+    @include text-preset-3;
+    color: $neutral-0;
+  }
+
+  .tile-icon {
+    max-height: 60px;
+  }
+
+  .tile-top {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tile-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.tile-main {
+  max-width: 800px;
+  background: url('/src/assets/images/bg-today-small.svg') center center / cover
+    no-repeat;
+  border-radius: 20px;
+  gap: 28px;
+  text-align: center;
+  border: none;
+  border-radius: 20px;
+  padding: 40px 25px;
+
+  .tile-text {
+    @include text-preset-6;
+    color: $neutral-0;
+  }
+
+  .tile-title {
+    @include text-preset-4;
+    color: $neutral-0;
+  }
+
+  .tile-icon {
+    max-height: 120px;
+  }
+
+  .tile-value {
+    @include text-preset-1;
+    color: $neutral-0;
+  }
+
+  .tile-bottom {
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 726px) {
+  .tile-main {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

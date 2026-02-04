@@ -1,0 +1,12 @@
+.current-forecast {
+  display: grid;
+  gap: 20px;
+  grid-area: current;
+
+  &-secondary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(163px, 1fr));
+    justify-content: space-between;
+    gap: 16px;
+  }
+}
