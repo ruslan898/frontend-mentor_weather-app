@@ -1,5 +1,21 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
 .daily-forecast {
   height: 100px;
-  background-color: red;
   grid-area: daily;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .title {
+    @include text-preset-5;
+    color: $neutral-0;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(89px, 1fr));
+    gap: 16px;
+  }
 }

@@ -74,6 +74,22 @@
   }
 }
 
+.tile-daily {
+  padding: 16px 10px;
+  text-align: center;
+
+  .tile-icon {
+    max-width: 60px;
+    max-height: 60px;
+    align-self: center;
+  }
+
+  .tile-value {
+    @include text-preset-7;
+    color: $neutral-0;
+  }
+}
+
 @media (min-width: 726px) {
   .tile-main {
     flex-direction: row;

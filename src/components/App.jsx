@@ -17,7 +17,7 @@ export default function App() {
             <SearchForm />
             <CurrentForecast />
             <DailyForecast />
-            <HourlyForecast />
+            {/* <HourlyForecast /> */}
           </div>
         </div>
       </main>
