@@ -1,3 +1,44 @@
-@use '../sass/variables.scss' as *;
-@use '../sass/mixins.scss' as *;
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
 
+main {
+  padding: 48px 0;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+}
+
+.main-title {
+  text-align: center;
+  padding: 0 5px;
+  @include text-preset-2;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 32px;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 50px 0 80px;
+  }
+}
+
+@media (min-width: 1440px) {
+  main {
+    padding: 65px 0 80px;
+
+    .container {
+      gap: 64px;
+    }
+  }
+
+  .app-main {
+    row-gap: 48px;
+  }
+}

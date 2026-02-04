@@ -4,12 +4,14 @@
 .btn {
   padding: 8px 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
   background-color: $neutral-800;
   color: $neutral-0;
   border: none;
   border-radius: 6px;
+  text-align: center;
   cursor: pointer;
   @include text-preset-8;
 
@@ -21,6 +23,13 @@
   &-arrow-icon {
     width: 9px;
     height: 14px;
+  }
+
+  &-search {
+    padding: 16px 24px;
+    background-color: $blue-500;
+    border-radius: 12px;
+    @include text-preset-5-medium;
   }
 }
 
@@ -38,6 +47,10 @@
     &-arrow-icon {
       width: 12px;
       height: 18px;
+    }
+
+    &-search {
+      padding: 16px 24px;
     }
   }
 }

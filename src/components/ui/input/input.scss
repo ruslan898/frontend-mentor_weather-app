@@ -1,0 +1,36 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
+.input {
+  padding: 16px 24px;
+  border-radius: 12px;
+  background-color: $neutral-800;
+  border: none;
+  color: $neutral-200;
+  @include text-preset-5-medium;
+
+  &-search {
+    padding-left: 60px;
+    background-image: url('/src/assets/images/icon-search.svg');
+    background-repeat: no-repeat;
+    background-position: 24px center;
+    background-size: 20px 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .input {
+    &-search {
+      flex: 1;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .input {
+    &-search {
+      flex: 0;
+      flex-basis: 526px;
+    }
+  }
+}
