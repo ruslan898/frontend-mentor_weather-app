@@ -2,16 +2,10 @@
 @use '/src/sass/mixins.scss' as *;
 
 .daily-forecast {
-  height: 100px;
   grid-area: daily;
   display: flex;
   flex-direction: column;
   gap: 20px;
-
-  .title {
-    @include text-preset-5;
-    color: $neutral-0;
-  }
 
   &-grid {
     display: grid;

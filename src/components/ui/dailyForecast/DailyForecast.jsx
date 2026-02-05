@@ -1,4 +1,5 @@
 import Tile from '../tile/Tile';
+import TitleSecondary from '../titleSecondary/TitleSecondary';
 
 import './daily-forecast.scss';
 
@@ -13,7 +14,7 @@ import iconFog from '/src/assets/images/icon-fog.webp';
 export default function DailyForecast() {
   return (
     <div className="daily-forecast">
-      <h2 className="title">Daily forecast</h2>
+      <TitleSecondary>Daily forecast</TitleSecondary>
       <div className="daily-forecast-grid">
         <Tile
           variant="daily"
@@ -53,7 +54,7 @@ export default function DailyForecast() {
         />
         <Tile
           variant="daily"
-          text="mon"
+          text="Mon"
           icon={iconFog}
           value={['24°', '15°']}
         />

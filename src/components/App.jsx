@@ -2,7 +2,7 @@ import Header from './ui/header/Header';
 import SearchForm from './ui/search-form/SearchForm';
 import CurrentForecast from './ui/currentForecast/CurrentForecast';
 import DailyForecast from './ui/dailyForecast/dailyForecast';
-import HourlyForecast from './ui/hourlyForecast/hourlyForecast';
+import HourlyForecast from './ui/hourlyForecast/HourlyForecast';
 
 import './app.scss';
 
@@ -17,7 +17,7 @@ export default function App() {
             <SearchForm />
             <CurrentForecast />
             <DailyForecast />
-            {/* <HourlyForecast /> */}
+            <HourlyForecast />
           </div>
         </div>
       </main>

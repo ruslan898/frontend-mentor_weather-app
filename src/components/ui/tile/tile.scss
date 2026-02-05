@@ -90,6 +90,31 @@
   }
 }
 
+.tile-hourly {
+  padding: 10px 12px;
+  background-color: $neutral-700;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  .tile-icon {
+    max-width: 40px;
+    max-height: 40px;
+  }
+
+  .tile-text {
+    @include text-preset-5-medium;
+    color: $neutral-0;
+  }
+
+  .tile-value {
+    @include text-preset-7;
+    color: $neutral-0;
+    margin-left: auto;
+  }
+}
+
 @media (min-width: 726px) {
   .tile-main {
     flex-direction: row;

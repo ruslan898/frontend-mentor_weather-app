@@ -26,11 +26,21 @@ export default function Tile({ variant, icon, title, text, value = [] }) {
     return (
       <div className={classes}>
         <p className="tile-text">{text || defaultContent}</p>
-        <img src={icon} alt="" className="tile-icon" />
+        <img src={icon} alt="Weather icon" className="tile-icon" />
         <div className="tile-bottom">
           <p className="tile-value">{valueArr[0] || defaultContent}</p>
           <p className="tile-value">{valueArr[1] || defaultContent}</p>
         </div>
+      </div>
+    );
+  }
+
+  if (variant === 'hourly') {
+    return (
+      <div className={classes}>
+        <img src={icon} alt="Weather icon" className="tile-icon" />
+        <p className="tile-text">{text || defaultContent}</p>
+        <p className="tile-value">{valueArr[0] || defaultContent}</p>
       </div>
     );
   }

@@ -1,0 +1,7 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
+.title {
+  @include text-preset-5;
+  color: $neutral-0;
+}

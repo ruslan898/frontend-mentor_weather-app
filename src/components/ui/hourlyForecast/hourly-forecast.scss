@@ -1,5 +1,18 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
 .hourly-forecast {
-  min-height: 100px;
-  background-color: blue;
+  padding: 20px 16px;
+  background-color: $neutral-800;
+  border-radius: 20px;
   grid-area: hourly;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
