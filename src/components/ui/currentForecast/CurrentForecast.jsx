@@ -1,27 +1,62 @@
 import Tile from '../tile/Tile';
+import { getWeatherIcon } from '../../utility';
 
 import './current-forecast.scss';
 
-import iconSunny from '/src/assets/images/icon-sunny.webp';
+export default function CurrentForecast({ weatherData }) {
+  const location = weatherData.timezone.split('/').reverse().join(', ');
 
-export default function CurrentForecast() {
+  const {
+    time,
+    temperature_2m: temperature,
+    apparent_temperature: apparentTemperature,
+    precipitation,
+    relative_humidity_2m: humidity,
+    wind_speed_10m: windSpeed,
+    weather_code: weatherCode,
+  } = weatherData.current;
+
+  const {
+    temperature_2m: temperatureUnit,
+    apparent_temperature: apparentTemperatureUnit,
+    precipitation: precipitationUnit,
+    relative_humidity_2m: humidityUnit,
+    wind_speed_10m: windSpeedUnit,
+  } = weatherData.current_units;
+
+  const dateFormatted = new Date(time).toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
   return (
     <div className="current-forecast">
       <div className="current-forecast-main">
         <Tile
           variant="main"
-          icon={iconSunny}
-          title="Berlin, Germany"
-          text="Tuesday, Aug 5, 2025"
-          value="20°"
+          icon={getWeatherIcon(weatherCode)}
+          title={location}
+          text={dateFormatted}
+          valueNum={temperature}
+          valueUnit={temperatureUnit[0]}
         />
       </div>
 
       <div className="current-forecast-secondary">
-        <Tile text="Feels Like" value="18°" />
-        <Tile text="Humidity" value="46%" />
-        <Tile text="Wind" value="14 km/h" />
-        <Tile text="Precipitation" value="0 mm" />
+        <Tile
+          text="Feels Like"
+          valueNum={apparentTemperature}
+          valueUnit={apparentTemperatureUnit[0]}
+        />
+        <Tile text="Humidity" valueNum={humidity} valueUnit={humidityUnit} />
+        <Tile text="Wind" valueNum={windSpeed} valueUnit={windSpeedUnit} />
+        <Tile
+          text="Precipitation"
+          valueNum={precipitation}
+          valueUnit={precipitationUnit}
+        />
       </div>
     </div>
   );

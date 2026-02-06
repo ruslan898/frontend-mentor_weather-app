@@ -2,9 +2,20 @@ import clsx from 'clsx';
 
 import './tile.scss';
 
-export default function Tile({ variant, icon, title, text, value = [] }) {
+export default function Tile({
+  variant,
+  icon,
+  title,
+  text,
+  valueNum = [],
+  valueUnit,
+}) {
   const classes = clsx('tile', variant && `tile-${variant}`);
-  const valueArr = typeof value === 'string' ? [value] : value;
+
+  const valueNumArr = (Array.isArray(valueNum) ? valueNum : [valueNum]).map(
+    (valueNum) => Math.round(valueNum),
+  );
+
   const defaultContent = 'No data';
 
   if (variant === 'main') {
@@ -16,7 +27,10 @@ export default function Tile({ variant, icon, title, text, value = [] }) {
         </div>
         <div className="tile-bottom">
           <img src={icon} alt="Weather icon" className="tile-icon" />
-          <p className="tile-value">{valueArr[0] || defaultContent}</p>
+          <p className="tile-value">
+            {valueNumArr[0] ?? defaultContent}
+            {valueUnit}
+          </p>
         </div>
       </div>
     );
@@ -28,8 +42,14 @@ export default function Tile({ variant, icon, title, text, value = [] }) {
         <p className="tile-text">{text || defaultContent}</p>
         <img src={icon} alt="Weather icon" className="tile-icon" />
         <div className="tile-bottom">
-          <p className="tile-value">{valueArr[0] || defaultContent}</p>
-          <p className="tile-value">{valueArr[1] || defaultContent}</p>
+          <p className="tile-value">
+            {valueNumArr[0] ?? defaultContent}
+            {valueUnit}
+          </p>
+          <p className="tile-value">
+            {valueNumArr[1] ?? defaultContent}
+            {valueUnit}
+          </p>
         </div>
       </div>
     );
@@ -40,7 +60,10 @@ export default function Tile({ variant, icon, title, text, value = [] }) {
       <div className={classes}>
         <img src={icon} alt="Weather icon" className="tile-icon" />
         <p className="tile-text">{text || defaultContent}</p>
-        <p className="tile-value">{valueArr[0] || defaultContent}</p>
+        <p className="tile-value">
+          {valueNumArr[0] ?? defaultContent}
+          {valueUnit}
+        </p>
       </div>
     );
   }
@@ -51,7 +74,16 @@ export default function Tile({ variant, icon, title, text, value = [] }) {
         <p className="tile-text">{text || defaultContent}</p>
       </div>
       <div className="tile-bottom">
-        <p className="tile-value">{valueArr[0] || defaultContent}</p>
+        {text === 'Wind' || text === 'Precipitation' ? (
+          <p className="tile-value">
+            {valueNumArr[0] ?? defaultContent} {valueUnit}
+          </p>
+        ) : (
+          <p className="tile-value">
+            {valueNumArr[0] ?? defaultContent}
+            {valueUnit}
+          </p>
+        )}
       </div>
     </div>
   );
