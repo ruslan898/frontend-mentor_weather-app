@@ -16,19 +16,18 @@ export default function Tile({
     (valueNum) => Math.round(valueNum),
   );
 
-  const defaultContent = 'No data';
 
   if (variant === 'main') {
     return (
       <div className={classes}>
         <div className="tile-top">
-          <h2 className="tile-title">{title || defaultContent}</h2>
-          <p className="tile-text">{text || defaultContent}</p>
+          <h2 className="tile-title">{title}</h2>
+          <p className="tile-text">{text}</p>
         </div>
         <div className="tile-bottom">
           <img src={icon} alt="Weather icon" className="tile-icon" />
           <p className="tile-value">
-            {valueNumArr[0] ?? defaultContent}
+            {valueNumArr[0]}
             {valueUnit}
           </p>
         </div>
@@ -39,15 +38,15 @@ export default function Tile({
   if (variant === 'daily') {
     return (
       <div className={classes}>
-        <p className="tile-text">{text || defaultContent}</p>
+        <p className="tile-text">{text}</p>
         <img src={icon} alt="Weather icon" className="tile-icon" />
         <div className="tile-bottom">
           <p className="tile-value">
-            {valueNumArr[0] ?? defaultContent}
+            {valueNumArr[0]}
             {valueUnit}
           </p>
           <p className="tile-value">
-            {valueNumArr[1] ?? defaultContent}
+            {valueNumArr[1]}
             {valueUnit}
           </p>
         </div>
@@ -59,9 +58,9 @@ export default function Tile({
     return (
       <div className={classes}>
         <img src={icon} alt="Weather icon" className="tile-icon" />
-        <p className="tile-text">{text || defaultContent}</p>
+        <p className="tile-text">{text}</p>
         <p className="tile-value">
-          {valueNumArr[0] ?? defaultContent}
+          {valueNumArr[0]}
           {valueUnit}
         </p>
       </div>
@@ -71,16 +70,16 @@ export default function Tile({
   return (
     <div className={classes}>
       <div className="tile-top">
-        <p className="tile-text">{text || defaultContent}</p>
+        <p className="tile-text">{text}</p>
       </div>
       <div className="tile-bottom">
         {text === 'Wind' || text === 'Precipitation' ? (
           <p className="tile-value">
-            {valueNumArr[0] ?? defaultContent} {valueUnit}
+            {valueNumArr[0]} {valueUnit}
           </p>
         ) : (
           <p className="tile-value">
-            {valueNumArr[0] ?? defaultContent}
+            {valueNumArr[0]}
             {valueUnit}
           </p>
         )}

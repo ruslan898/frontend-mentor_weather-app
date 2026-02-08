@@ -12,8 +12,13 @@
   border: none;
   border-radius: 6px;
   text-align: center;
+  transition: 0.2s all;
   cursor: pointer;
   @include text-preset-8;
+
+  &:hover {
+    background-color: $neutral-700;
+  }
 
   &-gear-icon {
     width: 14px;
@@ -30,6 +35,14 @@
     background-color: $blue-500;
     border-radius: 12px;
     @include text-preset-5-medium;
+
+    &:hover {
+      background-color: $blue-700;
+    }
+
+    &:focus {
+      background-color: $blue-500;
+    }
   }
 
   &-hourly {

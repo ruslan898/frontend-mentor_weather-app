@@ -3,6 +3,7 @@
 
 .tile {
   max-width: 182px;
+  min-height: 118px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -40,6 +41,7 @@
 
 .tile-main {
   max-width: 800px;
+  min-height: 286px;
   background: url('/src/assets/images/bg-today-small.svg') center center / cover
     no-repeat;
   border-radius: 20px;
@@ -75,6 +77,7 @@
 }
 
 .tile-daily {
+  min-height: 165px;
   padding: 16px 10px;
   text-align: center;
 
@@ -91,6 +94,7 @@
 }
 
 .tile-hourly {
+  min-height: 60px;
   padding: 10px 12px;
   background-color: $neutral-700;
   display: flex;
@@ -115,8 +119,10 @@
   }
 }
 
-@media (min-width: 726px) {
+@media (min-width: 768px) {
   .tile-main {
+    background: url('/src/assets/images/bg-today-large.svg') center center / cover
+    no-repeat;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

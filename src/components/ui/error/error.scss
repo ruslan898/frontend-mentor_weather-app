@@ -1,0 +1,35 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
+.app-main.error {
+  display: block;
+}
+
+.error {
+
+  &-box {
+    max-width: 593px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+
+  &-icon {
+    width: 42px;
+    height: 50px;
+  }
+
+  &-title {
+    color: $neutral-0;
+    @include text-preset-2;
+  }
+
+  &-text {
+    color: $neutral-200;
+    @include text-preset-5-medium;
+  }
+}
+

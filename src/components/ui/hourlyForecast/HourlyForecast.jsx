@@ -48,6 +48,7 @@ export default function HourlyForecast({ weatherData }) {
         text={hoursFormatted}
         valueNum={temperature}
         valueUnit={temperatureUnit[0]}
+        key={hoursFormatted}
       />
     );
   });

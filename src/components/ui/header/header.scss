@@ -9,6 +9,18 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .btn-wrapper {
+    position: relative;
+  }
+
+  .units-dropdown {
+    min-width: 214px;
+    padding-top: 10px;
+    position: absolute;
+    right: 0;
+    top: 40px;
+  }
 }
 
 @media (min-width: 768px) {

@@ -1,0 +1,28 @@
+@use '/src/sass/variables.scss' as *;
+@use '/src/sass/mixins.scss' as *;
+
+.dropdown {
+  &-menu {
+    max-width: 526px;
+    background-color: $neutral-800;
+    padding: 8px;
+    border: 1px solid $neutral-700;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  &-title {
+    color: $neutral-300;
+    @include text-preset-8;
+    padding: 6px 8px 0;
+  }
+
+  &-divider {
+    width: 100%;
+    background-color: $neutral-600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0;
+  }
+}
