@@ -9,34 +9,45 @@ import iconStorm from '/src/assets/images/icon-storm.webp';
 
 export function getWeatherIcon(weatherCode) {
   if (weatherCode === 0) {
-    return iconSunny
+    return iconSunny;
   }
   if (weatherCode >= 1 && weatherCode <= 2) {
-    return iconPartlyCloudy
+    return iconPartlyCloudy;
   }
   if (weatherCode === 3) {
-    return iconOvercast
+    return iconOvercast;
   }
   if (weatherCode >= 45 && weatherCode <= 48) {
-    return iconFog
+    return iconFog;
   }
   if (weatherCode >= 51 && weatherCode <= 57) {
-    return iconDrizzle
+    return iconDrizzle;
   }
   if (weatherCode >= 61 && weatherCode <= 67) {
-    return iconRain
+    return iconRain;
   }
   if (weatherCode >= 71 && weatherCode <= 77) {
-    return iconSnow
+    return iconSnow;
   }
   if (weatherCode >= 80 && weatherCode <= 82) {
-    return iconRain
+    return iconRain;
   }
   if (weatherCode >= 85 && weatherCode <= 86) {
-    return iconSnow
+    return iconSnow;
   }
   if (weatherCode >= 95 && weatherCode <= 99) {
-    return iconStorm
+    return iconStorm;
   }
+}
 
+export function isMetricUnit(obj, prop) {
+  if (prop === 'majority') {
+    const metricPropCount = Object.values(obj).reduce(
+      (total, item) => (item === 'Metric' ? total + 1 : total),
+      0,
+    );
+
+    return metricPropCount >= 2
+  }
+  return obj[prop] === 'Metric';
 }

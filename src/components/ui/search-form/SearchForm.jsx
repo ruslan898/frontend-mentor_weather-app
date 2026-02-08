@@ -1,7 +1,7 @@
 import Input from '../input/Input';
 import Button from '../button/Button';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
-import DropdownItem from '../dropdownItem/DropdownItem';
+import DropdownItem from '../dropdownButton/DropdownButton';
 
 import './search-form.scss';
 

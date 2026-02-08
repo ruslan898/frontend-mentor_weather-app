@@ -6,6 +6,7 @@ import DailyForecast from './ui/dailyForecast/dailyForecast';
 import HourlyForecast from './ui/hourlyForecast/HourlyForecast';
 import Skeleton from './ui/skeleton/Skeleton';
 import Error from './ui/error/Error';
+import { isMetricUnit } from './utility';
 
 // To-do
 // 1. Display different error messages depending on response status
@@ -15,18 +16,32 @@ import './app.scss';
 export default function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [appInfo, setAppInfo] = useState({
-    unitType: 'Metric',
+    unitTypes: {
+      temperature: 'Metric',
+      windSpeed: 'Metric',
+      precipitation: 'Metric',
+    },
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const isMetricUnit = appInfo.unitType === 'Metric';
-    const imperialUnitFetchUrl =
-      '&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch';
+    const unitFetchUrls = {
+      temperature: !isMetricUnit(appInfo.unitTypes, 'temperature')
+        ? '&temperature_unit=fahrenheit'
+        : '',
+      windSpeed: !isMetricUnit(appInfo.unitTypes, 'windSpeed')
+        ? '&wind_speed_unit=mph'
+        : '',
+      precipitation: !isMetricUnit(appInfo.unitTypes, 'precipitation')
+        ? '&precipitation_unit=inch'
+        : '',
+    };
+
+    const unitFetchString = Object.values(unitFetchUrls).join('');
 
     fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&timezone=auto${!isMetricUnit ? imperialUnitFetchUrl : ''}`,
+      `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&timezone=auto${unitFetchString}`,
     )
       .then((res) => {
         setLoading(true);
@@ -46,13 +61,37 @@ export default function App() {
       .finally(() => {
         setLoading(false);
       });
-  }, [appInfo.unitType]);
+  }, [appInfo.unitTypes]);
 
-  function toggleUnitType() {
-    const isMetricUnit = appInfo.unitType === 'Metric';
+  function toggleUnitType(obj, prop) {
+    if (prop === 'all') {
+      const isMajorityMetric = isMetricUnit(obj, 'majority');
 
-    setAppInfo({
-      unitType: isMetricUnit ? 'Imperial' : 'Metric',
+      const newObj = Object.fromEntries(
+        Object.keys(obj).map((key) => [
+          key,
+          isMajorityMetric ? 'Imperial' : 'Metric',
+        ]),
+      );
+
+      setAppInfo({
+        unitTypes: {
+          ...newObj,
+        },
+      });
+
+      return;
+    }
+
+    const isMetric = isMetricUnit(obj, prop);
+
+    setAppInfo((prevVal) => {
+      return {
+        unitTypes: {
+          ...prevVal.unitTypes,
+          [prop]: isMetric ? 'Imperial' : 'Metric',
+        },
+      };
     });
   }
 

@@ -1,7 +1,7 @@
 @use '/src/sass/variables.scss' as *;
 @use '/src/sass/mixins.scss' as *;
 
-.dropdown-item {
+.dropdown-button {
   position: relative;
   padding: 10px 8px;
   color: $neutral-0;
@@ -11,6 +11,11 @@
   border-radius: 8px;
   transition: 0.2s all;
   text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $neutral-700;
+  }
 
   &.active {
     display: flex;
@@ -22,13 +27,5 @@
       width: 14px;
       height: 17px;
     }
-  }
-}
-
-button.dropdown-item {
-  cursor: pointer;
-
-  &:hover {
-    background-color: $neutral-700;
   }
 }

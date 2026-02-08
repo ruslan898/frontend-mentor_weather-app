@@ -1,11 +1,7 @@
-import DropdownItem from '../dropdownItem/DropdownItem';
+import DropdownItem from '../dropdownButton/DropdownButton';
 
-import './dropdown-menu.scss'
+import './dropdown-menu.scss';
 
-export default function DropdownMenu({children}) {
-  return (
-    <div className="dropdown-menu">
-      {children}
-    </div>
-  );
+export default function DropdownMenu({ children }) {
+  return <div className="dropdown-menu">{children}</div>;
 }

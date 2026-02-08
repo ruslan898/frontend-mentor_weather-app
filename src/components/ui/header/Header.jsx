@@ -3,7 +3,8 @@ import useToggle from '../../hooks/useToggle';
 import Logo from '../logo/Logo';
 import Button from '../button/Button';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
-import DropdownItem from '../dropdownItem/DropdownItem';
+import DropdownButton from '../dropdownButton/DropdownButton';
+import { isMetricUnit } from '../../utility';
 
 import './header.scss';
 
@@ -13,8 +14,6 @@ import iconDropdown from '/src/assets/images/icon-dropdown.svg';
 
 export default function Header({ appInfo, onUnitToggle }) {
   const [dropdownOpen, toggleDropdownOpen] = useToggle(false);
-
-  const isMetricUnit = appInfo.unitType === 'Metric';
 
   return (
     <header className="header">
@@ -33,38 +32,84 @@ export default function Header({ appInfo, onUnitToggle }) {
               className="btn-arrow-icon"
             />
           </Button>
+
           {dropdownOpen && (
             <div className="units-dropdown">
               <DropdownMenu>
-                <DropdownItem type="button" onUnitToggle={onUnitToggle}>
-                  Switch to {isMetricUnit ? 'Imperial' : 'Metric'}
-                </DropdownItem>
+                <DropdownButton
+                  onUnitToggle={() =>
+                    onUnitToggle(appInfo.unitTypes, 'all')
+                  }
+                >
+                  Switch to{' '}
+                  {isMetricUnit(appInfo.unitTypes, 'majority')
+                    ? 'Imperial'
+                    : 'Metric'}
+                </DropdownButton>
 
                 <h3 className="dropdown-title">Temperature</h3>
 
-                <DropdownItem active={isMetricUnit}>Celsius (°C)</DropdownItem>
+                <DropdownButton
+                  onUnitToggle={() =>
+                    onUnitToggle(appInfo.unitTypes, 'temperature')
+                  }
+                  active={isMetricUnit(appInfo.unitTypes, 'temperature')}
+                >
+                  Celsius (°C)
+                </DropdownButton>
 
-                <DropdownItem active={!isMetricUnit}>
+                <DropdownButton
+                  onUnitToggle={() =>
+                    onUnitToggle(appInfo.unitTypes, 'temperature')
+                  }
+                  active={!isMetricUnit(appInfo.unitTypes, 'temperature')}
+                >
                   Fahrenheit (°F)
-                </DropdownItem>
+                </DropdownButton>
 
                 <div className="dropdown-divider" />
 
                 <h3 className="dropdown-title">Wind Speed</h3>
 
-                <DropdownItem active={isMetricUnit}>km/h</DropdownItem>
+                <DropdownButton
+                  onUnitToggle={() =>
+                    onUnitToggle(appInfo.unitTypes, 'windSpeed')
+                  }
+                  active={isMetricUnit(appInfo.unitTypes, 'windSpeed')}
+                >
+                  km/h
+                </DropdownButton>
 
-                <DropdownItem active={!isMetricUnit}>mph</DropdownItem>
+                <DropdownButton
+                  onUnitToggle={() =>
+                    onUnitToggle(appInfo.unitTypes, 'windSpeed')
+                  }
+                  active={!isMetricUnit(appInfo.unitTypes, 'windSpeed')}
+                >
+                  mph
+                </DropdownButton>
 
                 <div className="dropdown-divider" />
 
                 <h3 className="dropdown-title">Precipitation</h3>
 
-                <DropdownItem active={isMetricUnit}>
+                <DropdownButton
+                  onUnitToggle={() =>
+                    onUnitToggle(appInfo.unitTypes, 'precipitation')
+                  }
+                  active={isMetricUnit(appInfo.unitTypes, 'precipitation')}
+                >
                   Millimeters (mm)
-                </DropdownItem>
+                </DropdownButton>
 
-                <DropdownItem active={!isMetricUnit}>Inches (in)</DropdownItem>
+                <DropdownButton
+                  onUnitToggle={() =>
+                    onUnitToggle(appInfo.unitTypes, 'precipitation')
+                  }
+                  active={!isMetricUnit(appInfo.unitTypes, 'precipitation')}
+                >
+                  Inches (in)
+                </DropdownButton>
               </DropdownMenu>
             </div>
           )}
