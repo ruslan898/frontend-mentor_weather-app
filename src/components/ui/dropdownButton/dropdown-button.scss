@@ -1,31 +1,44 @@
 @use '/src/sass/variables.scss' as *;
 @use '/src/sass/mixins.scss' as *;
 
-.dropdown-button {
-  position: relative;
-  padding: 10px 8px;
-  color: $neutral-0;
-  @include text-preset-7;
-  background-color: $neutral-800;
-  border: none;
-  border-radius: 8px;
-  transition: 0.2s all;
-  text-align: left;
-  cursor: pointer;
+.dropdown {
+  &-button {
+    position: relative;
+    padding: 10px 8px;
+    color: $neutral-0;
+    @include text-preset-7;
+    background-color: $neutral-800;
+    border: none;
+    border-radius: 8px;
+    transition: 0.2s all;
+    text-align: left;
+    cursor: pointer;
 
-  &:hover {
-    background-color: $neutral-700;
+    &:hover {
+      background-color: $neutral-700;
+    }
+
+    &.active {
+      display: flex;
+      justify-content: space-between;
+      background-color: $neutral-700;
+
+      &::after {
+        content: url('/src/assets/images/icon-checkmark.svg');
+        width: 14px;
+        height: 17px;
+      }
+    }
   }
 
-  &.active {
-    display: flex;
-    justify-content: space-between;
-    background-color: $neutral-700;
-
-    &::after {
-      content: url('/src/assets/images/icon-checkmark.svg');
-      width: 14px;
-      height: 17px;
+  &-wrapper {
+    &-normal {
+      min-width: 214px;
+      padding-top: 10px;
+      position: absolute;
+      right: 0;
+      top: 40px;
+      z-index: 1;
     }
   }
 }

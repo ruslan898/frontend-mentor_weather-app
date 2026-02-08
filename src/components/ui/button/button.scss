@@ -56,6 +56,10 @@
       height: 18px;
     }
   }
+
+  &-wrapper {
+    position: relative;
+  }
 }
 
 @media (min-width: 768px) {

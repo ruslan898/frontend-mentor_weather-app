@@ -1,4 +1,4 @@
-import useToggle from '../../hooks/useToggle';
+import { useToggle } from '../../hooks/useToggle';
 
 import Logo from '../logo/Logo';
 import Button from '../button/Button';
@@ -34,12 +34,10 @@ export default function Header({ appInfo, onUnitToggle }) {
           </Button>
 
           {dropdownOpen && (
-            <div className="units-dropdown">
+            <div className="dropdown-wrapper-normal">
               <DropdownMenu>
                 <DropdownButton
-                  onUnitToggle={() =>
-                    onUnitToggle(appInfo.unitTypes, 'all')
-                  }
+                  onClick={() => onUnitToggle(appInfo.unitTypes, 'all')}
                 >
                   Switch to{' '}
                   {isMetricUnit(appInfo.unitTypes, 'majority')
@@ -50,7 +48,7 @@ export default function Header({ appInfo, onUnitToggle }) {
                 <h3 className="dropdown-title">Temperature</h3>
 
                 <DropdownButton
-                  onUnitToggle={() =>
+                  onClick={() =>
                     onUnitToggle(appInfo.unitTypes, 'temperature')
                   }
                   active={isMetricUnit(appInfo.unitTypes, 'temperature')}
@@ -59,7 +57,7 @@ export default function Header({ appInfo, onUnitToggle }) {
                 </DropdownButton>
 
                 <DropdownButton
-                  onUnitToggle={() =>
+                  onClick={() =>
                     onUnitToggle(appInfo.unitTypes, 'temperature')
                   }
                   active={!isMetricUnit(appInfo.unitTypes, 'temperature')}
@@ -72,7 +70,7 @@ export default function Header({ appInfo, onUnitToggle }) {
                 <h3 className="dropdown-title">Wind Speed</h3>
 
                 <DropdownButton
-                  onUnitToggle={() =>
+                  onClick={() =>
                     onUnitToggle(appInfo.unitTypes, 'windSpeed')
                   }
                   active={isMetricUnit(appInfo.unitTypes, 'windSpeed')}
@@ -81,7 +79,7 @@ export default function Header({ appInfo, onUnitToggle }) {
                 </DropdownButton>
 
                 <DropdownButton
-                  onUnitToggle={() =>
+                  onClick={() =>
                     onUnitToggle(appInfo.unitTypes, 'windSpeed')
                   }
                   active={!isMetricUnit(appInfo.unitTypes, 'windSpeed')}
@@ -94,7 +92,7 @@ export default function Header({ appInfo, onUnitToggle }) {
                 <h3 className="dropdown-title">Precipitation</h3>
 
                 <DropdownButton
-                  onUnitToggle={() =>
+                  onClick={() =>
                     onUnitToggle(appInfo.unitTypes, 'precipitation')
                   }
                   active={isMetricUnit(appInfo.unitTypes, 'precipitation')}
@@ -103,7 +101,7 @@ export default function Header({ appInfo, onUnitToggle }) {
                 </DropdownButton>
 
                 <DropdownButton
-                  onUnitToggle={() =>
+                  onClick={() =>
                     onUnitToggle(appInfo.unitTypes, 'precipitation')
                   }
                   active={!isMetricUnit(appInfo.unitTypes, 'precipitation')}

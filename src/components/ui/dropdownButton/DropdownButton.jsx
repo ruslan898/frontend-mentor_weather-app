@@ -3,12 +3,12 @@ import './dropdown-button.scss';
 export default function DropdownButton({
   children,
   active,
-  onUnitToggle,
+  ...props
 }) {
   return (
     <button
       className={`dropdown-button ${active ? 'active' : ''}`}
-      onClick={onUnitToggle}
+      {...props}
     >
       {children}
     </button>

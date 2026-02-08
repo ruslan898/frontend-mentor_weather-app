@@ -1,36 +1,33 @@
 import Button from '../button/Button';
 import TitleSecondary from '../titleSecondary/TitleSecondary';
 import Tile from '../tile/Tile';
+import DropdownMenu from '../dropdownMenu/DropdownMenu';
+import DropdownButton from '../dropdownButton/DropdownButton';
 import { getWeatherIcon } from '../../utility';
+import { useToggle } from '../../hooks/useToggle';
 
 import './hourly-forecast.scss';
 
 import iconDropdown from '/src/assets/images/icon-dropdown.svg';
 
-export default function HourlyForecast({ weatherData }) {
-  const now = new Date();
-  now.setMinutes(0, 0, 0);
+export default function HourlyForecast({
+  weatherData,
+  hourlyTimeIndex,
+  onHourlyTimeIndexChange,
+}) {
+  const [dropdownOpen, toggleDropdownOpen] = useToggle(false);
 
-  const pad = (n) => String(n).padStart(2, '0');
-  const currentHour =
-    `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}` +
-    `T${pad(now.getHours())}:${pad(now.getMinutes())}`;
-
-  const startIndex = weatherData.hourly.time.findIndex(
-    (date) => date === currentHour,
-  );
+  const startIndex = hourlyTimeIndex;
+  const endIndex = startIndex + 8;
 
   const hourlyTemperatureArr = weatherData.hourly.temperature_2m.slice(
     startIndex,
-    startIndex + 8,
+    endIndex,
   );
-  const hourlyTimeArr = weatherData.hourly.time.slice(
-    startIndex,
-    startIndex + 8,
-  );
+  const hourlyTimeArr = weatherData.hourly.time.slice(startIndex, endIndex);
   const hourlyWeatherCodeArr = weatherData.hourly.weather_code.slice(
     startIndex,
-    startIndex + 8,
+    endIndex,
   );
 
   const tiles = hourlyTimeArr.map((item, index) => {
@@ -53,14 +50,54 @@ export default function HourlyForecast({ weatherData }) {
     );
   });
 
+  function getWeekday(date) {
+    return new Date(date).toLocaleDateString('en-US', {
+      weekday: 'long',
+    });
+  }
+
+  const currentDate = weatherData.hourly.time[startIndex];
+
+  const currentWeekday = getWeekday(currentDate);
+
+  const dateIndexes = [];
+  for (let index = 15; index < weatherData.hourly.time.length; index += 24) {
+    dateIndexes.push(index);
+  }
+
+  const dropdownButtons = dateIndexes.map((index) => {
+    const dateArr = weatherData.hourly.time;
+
+    return (
+      <DropdownButton
+        onClick={() => {
+          onHourlyTimeIndexChange(index);
+          toggleDropdownOpen();
+        }}
+        key={index}
+      >
+        {getWeekday(dateArr[index])}
+      </DropdownButton>
+    );
+  });
+
   return (
     <div className="hourly-forecast">
       <div className="hourly-forecast-top">
         <TitleSecondary>Hourly forecast</TitleSecondary>
-        <Button type="hourly">
-          <span>Tuesday</span>
-          <img src={iconDropdown} alt="Arrow down icon" />
-        </Button>
+
+        <div className="btn-wrapper">
+          <Button type="hourly" onClick={toggleDropdownOpen}>
+            <span>{currentWeekday}</span>
+            <img src={iconDropdown} alt="Arrow down icon" />
+          </Button>
+
+          {dropdownOpen && (
+            <div className="dropdown-wrapper-normal">
+              <DropdownMenu>{dropdownButtons}</DropdownMenu>
+            </div>
+          )}
+        </div>
       </div>
       {tiles}
     </div>

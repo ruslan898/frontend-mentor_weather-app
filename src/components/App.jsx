@@ -16,6 +16,7 @@ import './app.scss';
 export default function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [appInfo, setAppInfo] = useState({
+    hourlyTimeIndex: 15,
     unitTypes: {
       temperature: 'Metric',
       windSpeed: 'Metric',
@@ -75,6 +76,7 @@ export default function App() {
       );
 
       setAppInfo({
+        ...appInfo,
         unitTypes: {
           ...newObj,
         },
@@ -85,13 +87,19 @@ export default function App() {
 
     const isMetric = isMetricUnit(obj, prop);
 
-    setAppInfo((prevVal) => {
-      return {
-        unitTypes: {
-          ...prevVal.unitTypes,
-          [prop]: isMetric ? 'Imperial' : 'Metric',
-        },
-      };
+    setAppInfo({
+      ...appInfo,
+      unitTypes: {
+        ...appInfo.unitTypes,
+        [prop]: isMetric ? 'Imperial' : 'Metric',
+      },
+    });
+  }
+
+  function changeHourlyTimeIndex(index) {
+    setAppInfo({
+      ...appInfo,
+      hourlyTimeIndex: index,
     });
   }
 
@@ -115,7 +123,11 @@ export default function App() {
                     <>
                       <CurrentForecast weatherData={weatherData} />
                       <DailyForecast weatherData={weatherData} />
-                      <HourlyForecast weatherData={weatherData} />
+                      <HourlyForecast
+                        weatherData={weatherData}
+                        hourlyTimeIndex={appInfo.hourlyTimeIndex}
+                        onHourlyTimeIndexChange={changeHourlyTimeIndex}
+                      />
                     </>
                   )
                 )}
