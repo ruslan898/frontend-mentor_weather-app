@@ -28,7 +28,16 @@ export default function SearchForm({
   );
 
   return (
-    <form action="#" className="search-form">
+    <form action={
+      () => {
+        const { name, country, latitude, longitude } = searchResults[0];
+
+        const locationName = `${name}, ${country}`;
+        onLocationChange({ locationName, latitude, longitude })
+      }
+
+
+    } className="search-form">
       <div className="input-wrapper">
         <Input
           type="text"
