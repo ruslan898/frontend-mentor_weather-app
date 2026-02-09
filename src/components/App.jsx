@@ -8,18 +8,18 @@ import Skeleton from './ui/skeleton/Skeleton';
 import Error from './ui/error/Error';
 import { isMetricUnit } from './utility';
 
-// To-do
-// 1. Display different error messages depending on response status
-
 import './app.scss';
 
 export default function App() {
+  // ============================ State declaration ====================================
   const [weatherData, setWeatherData] = useState(null);
+
   const [locationInfo, setLocationInfo] = useState({
     locationName: 'Berlin, Germany',
     latitude: '52.52',
     longitude: '13.41',
   });
+
   const [appInfo, setAppInfo] = useState({
     hourlyTimeIndex: 15,
     unitTypes: {
@@ -28,6 +28,7 @@ export default function App() {
       precipitation: 'Metric',
     },
   });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,7 +36,9 @@ export default function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState(null);
+  // =====================================================================================
 
+  // =============================== useEffect ===========================================
   useEffect(() => {
     if (inputValue.length >= 2) {
       fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${inputValue}`)
@@ -59,7 +62,9 @@ export default function App() {
         });
     }
   }, [inputValue]);
+  // =====================================================================================
 
+  // =============================== useEffect ===========================================
   useEffect(() => {
     const unitFetchUrls = {
       temperature: !isMetricUnit(appInfo.unitTypes, 'temperature')
@@ -99,7 +104,9 @@ export default function App() {
         setLoading(false);
       });
   }, [appInfo.unitTypes, locationInfo]);
+  // =====================================================================================
 
+  // =====================================================================================
   function toggleUnitType(obj, prop) {
     if (prop === 'all') {
       const isMajorityMetric = isMetricUnit(obj, 'majority');
@@ -152,46 +159,52 @@ export default function App() {
     setInputValue('');
   }
 
+  function renderComponents() {
+    if (error) {
+      return (
+        <Error locationInfo={locationInfo} setLocationInfo={setLocationInfo} />
+      );
+    } else {
+      return (
+        <>
+          <h1 className="main-title">How’s the sky looking today?</h1>
+          <div className={'app-main'}>
+            <SearchForm
+              inputValue={inputValue}
+              onInputChange={changeInputValue}
+              searchResults={searchResults}
+              onLocationChange={changeLocationInfo}
+            />
+            {loading ? (
+              <Skeleton />
+            ) : (
+              weatherData && (
+                <>
+                  <CurrentForecast
+                    weatherData={weatherData}
+                    locationName={locationInfo.locationName}
+                  />
+                  <DailyForecast weatherData={weatherData} />
+                  <HourlyForecast
+                    weatherData={weatherData}
+                    hourlyTimeIndex={appInfo.hourlyTimeIndex}
+                    onHourlyTimeIndexChange={changeHourlyTimeIndex}
+                  />
+                </>
+              )
+            )}
+          </div>
+        </>
+      );
+    }
+  }
+  // =====================================================================================
+
   return (
     <div className="app">
       <Header appInfo={appInfo} onUnitToggle={toggleUnitType} />
       <main>
-        <div className="container">
-          {error ? (
-            <Error error={error} />
-          ) : (
-            <>
-              <h1 className="main-title">How’s the sky looking today?</h1>
-              <div className={'app-main'}>
-                <SearchForm
-                  inputValue={inputValue}
-                  onInputChange={changeInputValue}
-                  searchResults={searchResults}
-                  onLocationChange={changeLocationInfo}
-                />
-
-                {loading ? (
-                  <Skeleton />
-                ) : (
-                  weatherData && (
-                    <>
-                      <CurrentForecast
-                        weatherData={weatherData}
-                        locationName={locationInfo.locationName}
-                      />
-                      <DailyForecast weatherData={weatherData} />
-                      <HourlyForecast
-                        weatherData={weatherData}
-                        hourlyTimeIndex={appInfo.hourlyTimeIndex}
-                        onHourlyTimeIndexChange={changeHourlyTimeIndex}
-                      />
-                    </>
-                  )
-                )}
-              </div>
-            </>
-          )}
-        </div>
+        <div className="container">{renderComponents()}</div>
       </main>
     </div>
   );

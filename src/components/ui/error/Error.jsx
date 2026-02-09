@@ -5,7 +5,7 @@ import './error.scss';
 import iconError from '/src/assets/images/icon-error.svg';
 import iconRetry from '/src/assets/images/icon-retry.svg';
 
-export default function Error() {
+export default function Error({ locationInfo, setLocationInfo }) {
   return (
     <div className="error-box">
       <img src={iconError} alt="Error icon" className="error-icon" />
@@ -14,7 +14,7 @@ export default function Error() {
         We couldn’t connect to the server (API error). Please try again in a few
         moments.
       </p>
-      <Button>
+      <Button onClick={() => setLocationInfo({ ...locationInfo })}>
         <img src={iconRetry} alt="Retry icon" />
         <span>Retry</span>
       </Button>
