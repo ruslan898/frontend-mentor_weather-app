@@ -3,8 +3,8 @@ import { getWeatherIcon } from '../../utility';
 
 import './current-forecast.scss';
 
-export default function CurrentForecast({ weatherData }) {
-  const location = weatherData.timezone.split('/').reverse().join(', ');
+export default function CurrentForecast({ weatherData, locationName }) {
+  // const location = weatherData.timezone.split('/').reverse().join(', ');
 
   const {
     time,
@@ -37,7 +37,7 @@ export default function CurrentForecast({ weatherData }) {
         <Tile
           variant="main"
           icon={getWeatherIcon(weatherCode)}
-          title={location}
+          title={locationName}
           text={dateFormatted}
           valueNum={temperature}
           valueUnit={temperatureUnit[0]}

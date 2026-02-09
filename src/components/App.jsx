@@ -15,6 +15,11 @@ import './app.scss';
 
 export default function App() {
   const [weatherData, setWeatherData] = useState(null);
+  const [locationInfo, setLocationInfo] = useState({
+    locationName: 'Berlin, Germany',
+    latitude: '52.52',
+    longitude: '13.41',
+  });
   const [appInfo, setAppInfo] = useState({
     hourlyTimeIndex: 15,
     unitTypes: {
@@ -25,6 +30,35 @@ export default function App() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [inputValue, setInputValue] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState(null);
+
+  useEffect(() => {
+    if (inputValue.length >= 2) {
+      fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${inputValue}`)
+        .then((res) => {
+          setSearchLoading(true);
+          setSearchError(null);
+          if (!res.ok) {
+            throw new Error('Nothing found!');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data.results);
+          setSearchResults(data.results.slice(0, 4));
+        })
+        .catch((err) => {
+          setSearchError(err);
+        })
+        .finally(() => {
+          setSearchLoading(false);
+        });
+    }
+  }, [inputValue]);
 
   useEffect(() => {
     const unitFetchUrls = {
@@ -41,8 +75,10 @@ export default function App() {
 
     const unitFetchString = Object.values(unitFetchUrls).join('');
 
+    const { latitude, longitude } = locationInfo;
+
     fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&timezone=auto${unitFetchString}`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&timezone=auto${unitFetchString}`,
     )
       .then((res) => {
         setLoading(true);
@@ -62,7 +98,7 @@ export default function App() {
       .finally(() => {
         setLoading(false);
       });
-  }, [appInfo.unitTypes]);
+  }, [appInfo.unitTypes, locationInfo]);
 
   function toggleUnitType(obj, prop) {
     if (prop === 'all') {
@@ -103,6 +139,19 @@ export default function App() {
     });
   }
 
+  function changeInputValue(value) {
+    setInputValue(value);
+  }
+
+  function changeLocationInfo({ locationName, latitude, longitude }) {
+    setLocationInfo({
+      locationName,
+      latitude,
+      longitude,
+    });
+    setInputValue('');
+  }
+
   return (
     <div className="app">
       <Header appInfo={appInfo} onUnitToggle={toggleUnitType} />
@@ -114,14 +163,22 @@ export default function App() {
             <>
               <h1 className="main-title">How’s the sky looking today?</h1>
               <div className={'app-main'}>
-                <SearchForm />
+                <SearchForm
+                  inputValue={inputValue}
+                  onInputChange={changeInputValue}
+                  searchResults={searchResults}
+                  onLocationChange={changeLocationInfo}
+                />
 
                 {loading ? (
                   <Skeleton />
                 ) : (
                   weatherData && (
                     <>
-                      <CurrentForecast weatherData={weatherData} />
+                      <CurrentForecast
+                        weatherData={weatherData}
+                        locationName={locationInfo.locationName}
+                      />
                       <DailyForecast weatherData={weatherData} />
                       <HourlyForecast
                         weatherData={weatherData}
