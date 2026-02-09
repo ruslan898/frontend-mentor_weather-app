@@ -17,6 +17,7 @@ export default function SearchForm({
 
       return (
         <DropdownButton
+          key={latitude}
           onClick={() =>
             onLocationChange({ locationName, latitude, longitude })
           }
@@ -28,22 +29,26 @@ export default function SearchForm({
   );
 
   return (
-    <form action={
-      () => {
-        const { name, country, latitude, longitude } = searchResults[0];
+    <form
+      action={(formData) => {
+        const inputValue = formData.get('search');
+        if (inputValue.trim().length < 2) return;
 
-        const locationName = `${name}, ${country}`;
-        onLocationChange({ locationName, latitude, longitude })
-      }
-
-
-    } className="search-form">
+        if (searchResults.length > 0) {
+          const { name, country, latitude, longitude } = searchResults[0];
+          const locationName = `${name}, ${country}`;
+          onLocationChange({ locationName, latitude, longitude });
+        }
+      }}
+      className="search-form"
+    >
       <div className="input-wrapper">
         <Input
           type="text"
           placeholder="Search for a place..."
           name="search"
           variant="search"
+          minLength={2}
           value={inputValue}
           onChange={(e) => {
             onInputChange(e.target.value);

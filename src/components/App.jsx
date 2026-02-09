@@ -34,31 +34,18 @@ export default function App() {
 
   const [inputValue, setInputValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [searchError, setSearchError] = useState(null);
+
   // =====================================================================================
 
   // =============================== useEffect ===========================================
   useEffect(() => {
-    if (inputValue.length >= 2) {
+    if (inputValue.trim().length >= 2) {
       fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${inputValue}`)
-        .then((res) => {
-          setSearchLoading(true);
-          setSearchError(null);
-          if (!res.ok) {
-            throw new Error('Nothing found!');
-          }
-          return res.json();
-        })
+        .then((res) => res.json())
         .then((data) => {
-          console.log(data.results);
-          setSearchResults(data.results.slice(0, 4));
-        })
-        .catch((err) => {
-          setSearchError(err);
-        })
-        .finally(() => {
-          setSearchLoading(false);
+          if (data.results) {
+            setSearchResults(data.results.slice(0, 4));
+          }
         });
     }
   }, [inputValue]);
