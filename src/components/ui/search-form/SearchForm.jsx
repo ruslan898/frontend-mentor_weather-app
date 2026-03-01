@@ -46,6 +46,7 @@ export default function SearchForm({
         <Input
           type="text"
           placeholder="Search for a place..."
+          aria-label="Search for a place..."
           name="search"
           variant="search"
           minLength={2}
@@ -61,7 +62,7 @@ export default function SearchForm({
           </div>
         )}
       </div>
-      <Button type="search">Search</Button>
+      <Button variant="search" type='submit' aria-label='Search'>Search</Button>
     </form>
   );
 }

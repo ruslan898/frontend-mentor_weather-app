@@ -13,7 +13,7 @@ export default function Tile({
   const classes = clsx('tile', variant && `tile-${variant}`);
 
   const valueNumArr = (Array.isArray(valueNum) ? valueNum : [valueNum]).map(
-    (valueNum) => Math.round(valueNum),
+    (num) => Math.round(num),
   );
 
 

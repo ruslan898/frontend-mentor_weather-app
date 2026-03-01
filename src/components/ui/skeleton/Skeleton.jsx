@@ -1,5 +1,3 @@
-import Tile from '../tile/Tile';
-
 import './skeleton.scss';
 
 import iconLoading from '/src/assets/images/icon-loading.svg';
@@ -73,7 +71,7 @@ export default function Skeleton() {
         <div className="hourly-forecast-top">
           <h2 className="title">Hourly forecast</h2>
 
-          <button className="btn btn-hourly">
+          <button type="button" className="btn btn-hourly">
             <span>-</span>
             <img src={iconDropdown} alt="Arrow down icon" />
           </button>

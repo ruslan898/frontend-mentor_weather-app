@@ -81,7 +81,6 @@ export default function App() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setWeatherData(data);
       })
       .catch((err) => {

@@ -23,7 +23,7 @@ export default function Header({ appInfo, onUnitToggle }) {
         </Logo>
 
         <div className="btn-wrapper">
-          <Button onClick={toggleDropdownOpen}>
+          <Button onClick={toggleDropdownOpen} aria-label='Toggle measurement units'>
             <img src={iconUnits} alt="Gear icon" className="btn-gear-icon" />
             <span>Units</span>
             <img

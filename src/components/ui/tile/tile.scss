@@ -48,7 +48,6 @@
   gap: 28px;
   text-align: center;
   border: none;
-  border-radius: 20px;
   padding: 40px 25px;
 
   .tile-text {
@@ -121,8 +120,8 @@
 
 @media (min-width: 768px) {
   .tile-main {
-    background: url('/src/assets/images/bg-today-large.svg') center center / cover
-    no-repeat;
+    background: url('/src/assets/images/bg-today-large.svg') center center /
+      cover no-repeat;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
