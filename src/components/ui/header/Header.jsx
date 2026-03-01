@@ -4,7 +4,7 @@ import Logo from '../logo/Logo';
 import Button from '../button/Button';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import DropdownButton from '../dropdownButton/DropdownButton';
-import { isMetricUnit } from '../../utility';
+import { isMetricUnit } from '../../../utility/isMetricUnit';
 
 import './header.scss';
 
@@ -48,18 +48,14 @@ export default function Header({ appInfo, onUnitToggle }) {
                 <h3 className="dropdown-title">Temperature</h3>
 
                 <DropdownButton
-                  onClick={() =>
-                    onUnitToggle(appInfo.unitTypes, 'temperature')
-                  }
+                  onClick={() => onUnitToggle(appInfo.unitTypes, 'temperature')}
                   active={isMetricUnit(appInfo.unitTypes, 'temperature')}
                 >
                   Celsius (°C)
                 </DropdownButton>
 
                 <DropdownButton
-                  onClick={() =>
-                    onUnitToggle(appInfo.unitTypes, 'temperature')
-                  }
+                  onClick={() => onUnitToggle(appInfo.unitTypes, 'temperature')}
                   active={!isMetricUnit(appInfo.unitTypes, 'temperature')}
                 >
                   Fahrenheit (°F)
@@ -70,18 +66,14 @@ export default function Header({ appInfo, onUnitToggle }) {
                 <h3 className="dropdown-title">Wind Speed</h3>
 
                 <DropdownButton
-                  onClick={() =>
-                    onUnitToggle(appInfo.unitTypes, 'windSpeed')
-                  }
+                  onClick={() => onUnitToggle(appInfo.unitTypes, 'windSpeed')}
                   active={isMetricUnit(appInfo.unitTypes, 'windSpeed')}
                 >
                   km/h
                 </DropdownButton>
 
                 <DropdownButton
-                  onClick={() =>
-                    onUnitToggle(appInfo.unitTypes, 'windSpeed')
-                  }
+                  onClick={() => onUnitToggle(appInfo.unitTypes, 'windSpeed')}
                   active={!isMetricUnit(appInfo.unitTypes, 'windSpeed')}
                 >
                   mph

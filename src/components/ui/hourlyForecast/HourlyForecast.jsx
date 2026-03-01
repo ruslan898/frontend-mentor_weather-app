@@ -3,7 +3,7 @@ import TitleSecondary from '../titleSecondary/TitleSecondary';
 import Tile from '../tile/Tile';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import DropdownButton from '../dropdownButton/DropdownButton';
-import { getWeatherIcon } from '../../utility';
+import { getWeatherIcon } from '../../../utility/getWeatherIcon';
 import { useToggle } from '../../hooks/useToggle';
 
 import './hourly-forecast.scss';

@@ -6,7 +6,7 @@ import DailyForecast from './ui/dailyForecast/dailyForecast';
 import HourlyForecast from './ui/hourlyForecast/HourlyForecast';
 import Skeleton from './ui/skeleton/Skeleton';
 import Error from './ui/error/Error';
-import { isMetricUnit } from './utility';
+import { isMetricUnit } from '../utility/isMetricUnit';
 
 import './app.scss';
 

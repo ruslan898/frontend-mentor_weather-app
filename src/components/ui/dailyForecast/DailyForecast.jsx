@@ -1,6 +1,6 @@
 import Tile from '../tile/Tile';
 import TitleSecondary from '../titleSecondary/TitleSecondary';
-import { getWeatherIcon } from '../../utility.js';
+import { getWeatherIcon } from '../../../utility/getWeatherIcon';
 
 import './daily-forecast.scss';
 

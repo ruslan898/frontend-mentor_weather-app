@@ -1,5 +1,5 @@
 import Tile from '../tile/Tile';
-import { getWeatherIcon } from '../../utility';
+import { getWeatherIcon } from '../../../utility/getWeatherIcon';
 
 import './current-forecast.scss';
 
