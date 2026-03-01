@@ -1,5 +1,3 @@
-import DropdownItem from '../dropdownButton/DropdownButton';
-
 import './dropdown-menu.scss';
 
 export default function DropdownMenu({ children }) {

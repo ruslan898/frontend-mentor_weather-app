@@ -62,7 +62,7 @@ export default function SearchForm({
           </div>
         )}
       </div>
-      <Button variant="search" type='submit' aria-label='Search'>Search</Button>
+      <Button variant="search" type='submit'>Search</Button>
     </form>
   );
 }

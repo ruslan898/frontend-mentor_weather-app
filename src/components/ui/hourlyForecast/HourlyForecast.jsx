@@ -87,7 +87,7 @@ export default function HourlyForecast({
         <TitleSecondary>Hourly forecast</TitleSecondary>
 
         <div className="btn-wrapper">
-          <Button type="hourly" onClick={toggleDropdownOpen}>
+          <Button variant="hourly" onClick={toggleDropdownOpen}>
             <span>{currentWeekday}</span>
             <img src={iconDropdown} alt="Arrow down icon" />
           </Button>
