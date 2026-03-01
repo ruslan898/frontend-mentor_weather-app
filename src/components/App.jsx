@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from './ui/header/Header';
 import SearchForm from './ui/search-form/SearchForm';
 import CurrentForecast from './ui/currentForecast/CurrentForecast';
-import DailyForecast from './ui/dailyForecast/dailyForecast';
+import DailyForecast from './ui/dailyForecast/DailyForecast';
 import HourlyForecast from './ui/hourlyForecast/HourlyForecast';
 import Skeleton from './ui/skeleton/Skeleton';
 import Error from './ui/error/Error';
